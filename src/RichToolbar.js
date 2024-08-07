@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {FlatList, Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {actions} from './const';
+import {Image} from 'expo-image'
 
 export const defaultActions = [
   actions.keyboard,

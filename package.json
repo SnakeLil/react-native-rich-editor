@@ -1,7 +1,7 @@
 {
-  "name": "lil-react-native-pell-rich-editor",
+  "name": "arabcariana-react-native-rich-editor",
   "description": "React Native Rich Editor",
-  "version": "1.9.0",
+  "version": "1.0.0",
   "main": "src/index.js",
   "license": "MIT",
   "private": false,
@@ -15,7 +15,8 @@
   },
   "peerDependencies": {
     "react-native": ">=0.50.0",
-    "react-native-webview": ">=7.5.2"
+    "react-native-webview": ">=7.5.2",
+    "expo-image": "~1.12.13"
   },
   "bugs": {
     "url": "https://github.com/Snakelil/react-native-rich-editor/issues"
