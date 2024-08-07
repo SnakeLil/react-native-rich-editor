@@ -58,7 +58,7 @@ function createHTML(options = {}) {
         .content {font-family: Arial, Helvetica, sans-serif;color: ${color}; width: 100%;${
     !useContainer ? 'height:100%;' : ''
   }-webkit-overflow-scrolling: touch;padding-left: 0;padding-right: 0;direction: ${direction};}
-        .pell { height: 100%;} .pell-content { outline: 0; overflow-y: auto;padding: 10px;height: 100%;${contentCSSText};direction: ${direction};}
+        .pell { height: 100%;direction: ${direction};} .pell-content { outline: 0; overflow-y: auto;padding: 10px;height: 100%;${contentCSSText};direction: ${direction};}
     </style>
     <style>
         [placeholder]:empty:before { content: attr(placeholder); color: ${placeholderColor};direction: ${direction};}
