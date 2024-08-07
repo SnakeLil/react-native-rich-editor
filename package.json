@@ -14,9 +14,9 @@
     "@types/react-native": "*"
   },
   "peerDependencies": {
+    "expo-image": "~1.12.13",
     "react-native": ">=0.50.0",
-    "react-native-webview": ">=7.5.2",
-    "expo-image": "~1.12.13"
+    "react-native-webview": ">=7.5.2"
   },
   "bugs": {
     "url": "https://github.com/Snakelil/react-native-rich-editor/issues"
@@ -24,5 +24,8 @@
   "homepage": "https://github.com/Snakelil/react-native-rich-editor#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "arabcariana-react-native-rich-editor": "file:"
   }
 }
