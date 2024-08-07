@@ -1,7 +1,7 @@
 {
   "name": "arabcariana-react-native-rich-editor",
   "description": "React Native Rich Editor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.js",
   "license": "MIT",
   "private": false,
