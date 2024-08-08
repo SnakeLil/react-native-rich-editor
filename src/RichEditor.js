@@ -58,7 +58,8 @@ export default class RichTextEditor extends Component {
       initialFocus,
       disabled,
       styleWithCSS,
-      rtl
+      rtl,
+
     } = props;
     that.state = {
       html: {
@@ -144,7 +145,7 @@ export default class RichTextEditor extends Component {
 
   onMessage(event) {
     const that = this;
-    const {onFocus, onBlur, onChange, onPaste, onKeyUp, onKeyDown, onInput, onMessage, onCursorPosition, onLink} = that.props;
+    const {onFocus, onBlur, onChange, onPaste, onKeyUp, onKeyDown, onInput, onMessage, onCursorPosition, onLink,onPureTextChange} = that.props;
     try {
       const message = JSON.parse(event.nativeEvent.data);
       const data = message.data;
@@ -202,6 +203,9 @@ export default class RichTextEditor extends Component {
         case messages.OFFSET_Y:
           let offsetY = Number.parseInt(Number.parseInt(data) + that.layout.y || 0);
           offsetY > 0 && onCursorPosition(offsetY);
+          break;
+        case messages.CONTENT_TEXT_CHANGE:
+          onPureTextChange?.(data)
           break;
         default:
           onMessage?.(message);
@@ -426,6 +430,9 @@ export default class RichTextEditor extends Component {
     if (command) {
       this.sendAction(actions.content, 'commandDOM', command);
     }
+  }
+  getHtmlTextLength() {
+      this.sendAction(actions.content, 'getHtmlTextLength');
   }
 
   command(command) {

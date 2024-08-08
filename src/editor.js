@@ -104,8 +104,7 @@ function createHTML(options = {}) {
         }
         function querys(command){
             return document.querySelectorAll(command);
-        }
-
+        };
         function exec(command) {
             var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
             return document.execCommand(command, false, value);
@@ -449,7 +448,6 @@ function createHTML(options = {}) {
                 focus: function() { focusCurrent(); },
                 postHtml: function (){ postAction({type: 'CONTENT_HTML_RESPONSE', data: editor.content.innerHTML}); },
                 setPlaceholder: function(placeholder){ editor.content.setAttribute("placeholder", placeholder) },
-
                 setContentStyle: function(styles) {
                     styles = styles || {};
                     var bgColor = styles.backgroundColor, color = styles.color, pColor = styles.placeholderColor;
@@ -641,6 +639,10 @@ function createHTML(options = {}) {
                 postAction({type: 'SELECTION_CHANGE', data: []});
                 postAction({type: 'CONTENT_BLUR'});
             }
+            function hadlePureTextChange (length){
+                console.log('hadleChange')
+                postAction({type: 'CONTENT_TEXT_CHANGE', data: editor.content.innerText});
+            }
             function handleClick(event){
                 var ele = event.target;
                 if (ele.nodeName === 'INPUT' && ele.type === 'checkbox'){
@@ -660,6 +662,7 @@ function createHTML(options = {}) {
             addEventListener(content, 'keydown', handleKeydown);
             addEventListener(content, 'blur', handleBlur);
             addEventListener(content, 'focus', handleFocus);
+            addEventListener(content, 'input', hadlePureTextChange);
             addEventListener(content, 'paste', function (e) {
                 // get text representation of clipboard
                 var text = (e.originalEvent || e).clipboardData.getData('text/plain');
