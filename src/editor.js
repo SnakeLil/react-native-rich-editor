@@ -49,6 +49,7 @@ function createHTML(options = {}) {
 <html>
 <head>
     <title>RN Rich Text Editor</title>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <meta name="viewport" content="user-scalable=1.0,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
     <style>
         ${initialCSSText}
@@ -59,6 +60,42 @@ function createHTML(options = {}) {
     !useContainer ? 'height:100%;' : ''
   }-webkit-overflow-scrolling: touch;padding-left: 0;padding-right: 0;direction: ${direction};}
         .pell { height: 100%;direction: ${direction};} .pell-content { outline: 0; overflow-y: auto;padding: 10px;height: 100%;${contentCSSText};direction: ${direction};}
+        .image-move {
+          content: '';
+          z-index: 100;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          width: 30px;
+          height: 30px;
+          background-color: #00000060;
+          background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmZmZmZmYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtNyAxNyA1IDUgNS01aC00VjdoNGwtNS01LTUgNWg0djEweiIvPjwvc3ZnPg==');
+          background-size: 20px 20px;
+          background-position: center center;
+          background-repeat: no-repeat;
+          border-radius: 999px;
+        }
+        .image-delete {
+          content: '';
+          z-index: 100;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          bottom: 5px;
+          right: 5px;
+          width: 30px;
+          height: 30px;
+          background-color: #00000060;
+          background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaWQ9Ikljb25zIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiNmZmZmZmY7fTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEzLDBIMTFBMywzLDAsMCwwLDgsM1Y0SDJBMSwxLDAsMCwwLDIsNkgzVjIwYTQsNCwwLDAsMCw0LDRIMTdhNCw0LDAsMCwwLDQtNFY2aDFhMSwxLDAsMCwwLDAtMkgxNlYzQTMsMywwLDAsMCwxMywwWk0xMCwzYTEsMSwwLDAsMSwxLTFoMmExLDEsMCwwLDEsMSwxVjRIMTBabTksMTdhMiwyLDAsMCwxLTIsMkg3YTIsMiwwLDAsMS0yLTJWNkgxOVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMiw5YTEsMSwwLDAsMC0xLDF2OGExLDEsMCwwLDAsMiwwVjEwQTEsMSwwLDAsMCwxMiw5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTE1LDE4YTEsMSwwLDAsMCwyLDBWMTBhMSwxLDAsMCwwLTIsMFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik04LDlhMSwxLDAsMCwwLTEsMXY4YTEsMSwwLDAsMCwyLDBWMTBBMSwxLDAsMCwwLDgsOVoiLz48L3N2Zz4=');
+          background-size: 20px 20px;
+          background-position: center center;
+          background-repeat: no-repeat;
+          border-radius: 999px;
+        }
     </style>
     <style>
         [placeholder]:empty:before { content: attr(placeholder); color: ${placeholderColor};direction: ${direction};}
@@ -70,6 +107,7 @@ function createHTML(options = {}) {
 <body>
 <div class="content"><div id="editor" class="pell"/></div>
 <script>
+
     var __DEV__ = !!${window.__DEV__};
     var _ = (function (exports) {
         var anchorNode, focusNode, anchorOffset, focusOffset, _focusCollapse = false, cNode;
